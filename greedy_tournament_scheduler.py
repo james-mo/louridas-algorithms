@@ -1,18 +1,4 @@
-
-class Vertex:
-    def __init__(self, node1, node2):
-        self.node1 = node1
-        self.node2 = node2
-
-    def get_nodes(self):
-        return [self.node1, self.node2]
-
-    def output(self):
-        str = ""
-        str += self.node1.output()
-        str += self.node2.output()
-
-        return ''.join(sorted(str))
+from graph import Graph, Node, Vertex
 
 class Day:
     def __init__(self,index=0):
@@ -24,46 +10,6 @@ class Day:
     
     def list_matches(self):
         return self.matches
-
-
-class Graph:
-    
-    def __init__(self, nodes):
-        self.nodes = nodes
-        self.vertices = []
-
-    def add_vertices(self):
-
-        for n in self.nodes:
-            neighbors = n.get_neighbors()
-            for ni in neighbors:
-                v = Vertex(n,ni)
-                contains = False
-                for vi in self.vertices:
-                    if v.output() == vi.output():
-                        contains = True
-                if(not(contains)):
-                    self.vertices.append(v)
-    
-    def return_vertices(self):
-        return self.vertices
-
-
-class Node:
-    def __init__(self, name):
-        self.name = name
-        self.neighbors = []
-    
-    def add_neighbor(self, node):
-        self.neighbors.append(node)
-        if(not(self in node.get_neighbors())):
-            node.add_neighbor(self)
-
-    def get_neighbors(self):
-        return self.neighbors
-
-    def output(self):
-        return self.name
     
 a = Node("A")
 b = Node("B")
@@ -98,7 +44,6 @@ f.add_neighbor(g)
 g.add_neighbor(h)
 
 gr = Graph([a,b,c,d,e,f,g,h])
-gr.add_vertices()
 
 d = Day()
 days = [d]
